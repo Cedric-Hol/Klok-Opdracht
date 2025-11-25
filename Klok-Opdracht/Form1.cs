@@ -22,17 +22,17 @@ namespace Klok_Opdracht
         Point p0, p1, p2, p3;
         static int S = 150;
         static double offset = Math.PI / 2;
-
-
         private void button1_Click(object sender, EventArgs e)
         {
+            
             timer1.Start();
-            p0 = new Point(500, 200);
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
+            p0 = new Point(this.Width / 2, this.Height / 2);
+            draw_clockface(p0.X, p0.Y, S);
             second_hand();
             minute_hand();
             hour_hand();
@@ -70,5 +70,14 @@ namespace Klok_Opdracht
             p3 = new Point((int)(p0.X + A), (int)(p0.Y + O));
             this.CreateGraphics().DrawLine(new Pen(Color.Red, 2), p0, p3);
         }
+
+        private void draw_clockface(int w, int h, int s)
+        {
+            Graphics g = this.CreateGraphics();
+            int radius = s + 100 / 2;
+            int diameter = 2 * radius;
+            g.DrawEllipse(new Pen(Color.Black, 3), w - radius, h - radius, diameter, diameter);
+        }
+
     }
 }
